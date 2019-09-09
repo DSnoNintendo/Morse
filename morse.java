@@ -1,102 +1,159 @@
-import android.renderscript.ScriptGroup;
-
-import java.util.ArrayList;
-import java.util.List;
+/**
+ *
+ * @author Daryl Stronge
+ */
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
-
-public class morse {
-    public static String translate(char character) {
-        switch (character) {
+public class Morse {
+    //translate charracter to morse code
+    static String Translate(char ch) {
+        //make characters uppercase to account for both upper and lowercase letters
+        switch(Character.toUpperCase(ch)) {
             case 'A':
-                return (".-");
+                return(".- ");
             case 'B':
-                return ("-...");
+                return("-... ");
             case 'C':
-                return ("-.-.");
+                return("-.-. ");
             case 'D':
-                return ("-..");
+                return("-.. ");
             case 'E':
-                return (".");
+                return(". ");
             case 'F':
-                return ("..-.");
+                return("..-. ");
             case 'G':
-                return ("--.");
+                return("--. ");
             case 'H':
-                return ("....");
+                return(".... ");
             case 'I':
-                return ("..");
+                return(".. ");
             case 'J':
-                return (".---");
+                return(".--- ");
             case 'K':
-                return ("-.-");
+                return("-.- ");
             case 'L':
-                return (".-..");
+                return(".-.. ");
             case 'M':
-                return ("--");
+                return("-- ");
             case 'N':
-                return ("-.");
+                return("-. ");
             case 'O':
-                return ("---");
+                return("--- ");
             case 'P':
-                return (".--.");
+                return(".--. ");
             case 'Q':
-                return ("--.-");
+                return("--.- ");
             case 'R':
-                return (".-.");
+                return(".-. ");
             case 'S':
-                return ("...");
+                return("... ");
             case 'T':
-                return ("-");
+                return("- ");
             case 'U':
-                return ("..-");
+                return(".-. ");
             case 'V':
-                return ("...-");
+                return("...- ");
             case 'W':
-                return (".--");
+                return(".-- ");
             case 'X':
-                return ("-..-");
+                return("-..- ");
             case 'Y':
-                return ("-.--");
+                return("-.-- ");
             case 'Z':
-                return ("--..");
-            case '0':
-                return ("-----");
+                return("--.. ");
             case '1':
-                return (".----");
+                return(".---- ");
             case '2':
-                return ("..---");
+                return("..--- ");
             case '3':
-                return ("...--");
+                return("...-- ");
             case '4':
-                return ("....-");
+                return("....- ");
             case '5':
-                return (".....");
+                return("..... ");
             case '6':
-                return ("-....");
+                return("-.... ");
             case '7':
-                return ("--...");
+                return("--... ");
             case '8':
-                return ("---..");
+                return("---.. ");
             case '9':
-                return ("----.");
-        }
-        return ("");
+                return("----. ");
+            case '0':
+                return("----- ");
+            case ' ':
+                return("/ ");
+            case '.':
+                return(".-.-.- ");
+            case ',':
+                return("--..-- ");
+            case '?':
+                return("..--.. ");
+            case ':':
+                return("---... ");
+            case '/':
+                return("-..-. ");
+            case '-':
+                return("-....- ");
+            case '=':
+                return("-...- ");
+            //apostrophe
+            case '\'': 
+                return(".----. ");
+            case '(':
+                return("-.--. ");
+            case ')':
+                return("-.--.- ");
+            case '_':
+                return("..--.- ");
+            case '!':
+                return("-.-.-- ");
+            case '&':
+                return(".-... ");
+            case '"':
+                return(".-..-. ");
+            case ';':
+                return("-.-.-. ");
+            case '$':
+                return("...-..- ");
+            case '+':
+                return(".-.-.");
+            case '@':
+                return(".--.-.");
+                        
+                        
+                       
+        };
+        return("[UNKNOWN CHARACTER]");        
     }
-
+    
     public static void main(String[] args) {
+        //where translated characters will be stored
         List morseList = new ArrayList();
-        String dayString;
-        Scanner reader = new Scanner(System.in);  // Reading from System.in
-        System.out.println("Enter a messsge: ");
-        String message = reader.next().toUpperCase();
-        // switch statement with int data type
-
-        for (int x = 0; x < message.length(); x++) {
-            morseList.add(translate(message.charAt(x)));
-        }
-        System.out.println(morseList);
-
-
+        //morse code message will eventually be stored here
+        String morseMessage;
+        
+        //user input
+        Scanner in = new Scanner(System.in);
+        System.out.println("Enter a message.");
+        String message = in.nextLine();
+        
+        //iterate regular text message and translate characters
+        for (int i = 0; i < message.length(); i++ ) {
+            morseList.add(Translate(message.charAt(i)));
+        };
+        
+        //merge morse code translated characters
+        morseMessage = String.join("", morseList);
+        
+        System.out.println(morseMessage);
+        
     }
+    
+
+    
 }
+
+  
