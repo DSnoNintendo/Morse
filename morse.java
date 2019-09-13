@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+
 public class Morse {
     //translate charracter to morse code
     static String Translate(char ch) {
@@ -129,7 +130,59 @@ public class Morse {
         return("[UNKNOWN CHARACTER]");        
     }
     
+    static void sleep(int milliseconds) {
+        try
+            {
+                Thread.sleep(milliseconds); 
+            }
+        catch(InterruptedException ex)
+            {
+                Thread.currentThread().interrupt();
+            }
+    }
+    
+    static void play(String morseText, Audio dit,Audio dah) {
+        for (int i = 0;i < morseText.length(); i++) 
+        {
+            if (morseText.charAt(i) == '.') 
+            {
+                dit.play();
+                sleep(200);
+                dit.stop();
+                
+            } 
+            else if (morseText.charAt(i) == '-') 
+            {
+                dah.play();
+                sleep(300);
+                dah.stop();
+            } 
+            else if (morseText.charAt(i) == ' ') 
+            {
+                sleep(300);
+            }
+            else if (morseText.charAt(i) == '/') 
+            {
+                sleep(100);
+            }
+            
+            
+        }
+        
+        
+           
+   
+    }
+    
     public static void main(String[] args) {
+        Audio shortMorse = new Audio();
+        Audio longMorse = new Audio();
+        
+        shortMorse.path = "short.wav";
+        longMorse.path = "long.wav";
+        shortMorse.open();
+        longMorse.open();
+        
         //where translated characters will be stored
         List morseList = new ArrayList();
         //morse code message will eventually be stored here
@@ -141,7 +194,8 @@ public class Morse {
         String message = in.nextLine();
         
         //iterate regular text message and translate characters
-        for (int i = 0; i < message.length(); i++ ) {
+        for (int i = 0; i < message.length(); i++ ) 
+        {
             morseList.add(Translate(message.charAt(i)));
         };
         
@@ -150,9 +204,11 @@ public class Morse {
         
         System.out.println(morseMessage);
         
+        play(morseMessage, shortMorse, longMorse);
+        
     }
     
-
+    
     
 }
 
